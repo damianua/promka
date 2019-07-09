@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Domain\Catalog\Categories;
+namespace Domain\Catalog\Entities;
 
 
 use Domain\Core\AbstractEntity;

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Domain\Catalog\Prices;
+namespace spec\Domain\Catalog\Entities;
 
 use Domain\Catalog\Entities\Currency;
 use Domain\Catalog\Entities\Price;

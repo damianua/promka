@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Domain\Catalog\Products;
+namespace spec\Domain\Catalog\Entities;
 
 use Domain\Catalog\Entities\Category;
 use Domain\Core\AbstractEntity;

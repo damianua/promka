@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Domain\Catalog\Prices;
+namespace Domain\Catalog\Entities;
 
 
+use Domain\Catalog\Entities\Currency;
 use Domain\Core\AbstractEntity;
 
 class Price extends AbstractEntity

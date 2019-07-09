@@ -1,14 +1,24 @@
 <?php
 
 
-namespace Domain\Catalog\Prices;
+namespace Domain\Catalog\Entities;
 
 
+use Domain\Catalog\Exceptions\CatalogException;
 use Domain\Core\AbstractEntity;
 
 class Currency extends AbstractEntity
 {
-	/**
+    /**
+     * @var string
+     */
+    protected $name = '';
+    /**
+     * @var string
+     */
+    protected $code = '';
+
+    /**
 	 * @return string
 	 */
 	public function getName(): string
@@ -35,24 +45,25 @@ class Currency extends AbstractEntity
 		return $this->code;
 	}
 
-	/**
-	 * @param string $code
-	 * @return string
-	 */
+    /**
+     * @param string $code
+     * @return Currency
+     * @throws CatalogException
+     */
 	public function setCode(string $code): Currency
 	{
+	    $code = strtoupper($code);
+	    if(!$this->checkCode($code)){
+            throw CatalogException::getInvalidCurrencyCodeException($code);
+        }
+
 		$this->code = $code;
 
 		return $this;
 	}
-	/**
-	 * @var string
-	 */
-	protected $name = '';
-	/**
-	 * @var string
-	 */
-	protected $code = '';
 
-
+	public function checkCode(string $code)
+    {
+        return strlen($code) <= 3;
+    }
 }

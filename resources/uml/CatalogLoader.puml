@@ -1,0 +1,12 @@
+@startuml
+
+skinparam title{
+	borderThickness 2
+}
+
+title CatalogLoader
+
+component "Web Site Loader"
+component "File Loader"
+
+@enduml

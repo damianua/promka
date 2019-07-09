@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Domain\Catalog\Products;
+namespace Domain\Catalog\Entities;
 
 
-use Domain\Catalog\Categories\Category;
+use Domain\Catalog\Entities\Category;
 use Domain\Core\AbstractEntity;
 
 class Product extends AbstractEntity
 {
     protected $name = '';
     /**
-     * @var Category
+     * @var \Domain\Catalog\Entities\Category
      */
     protected $category;
 
@@ -28,7 +28,7 @@ class Product extends AbstractEntity
     }
 
     /**
-     * @return Category
+     * @return \Domain\Catalog\Entities\Category
      */
     public function getCategory(): ?Category
     {
@@ -36,7 +36,7 @@ class Product extends AbstractEntity
     }
 
     /**
-     * @param Category $category
+     * @param \Domain\Catalog\Entities\Category $category
      * @return Product
      */
     public function setCategory(Category $category)

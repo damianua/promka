@@ -1,8 +1,9 @@
 <?php
 
-namespace spec\Domain\Catalog\Prices;
+namespace spec\Domain\Catalog\Entities;
 
 use Domain\Catalog\Entities\Currency;
+use Domain\Catalog\Exceptions\CatalogException;
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -29,23 +30,21 @@ class CurrencySpec extends ObjectBehavior
 			->shouldReturn($name);
 	}
 
-	function it_should_set_and_get_code()
+    function it_should_set_and_get_code()
 	{
         $this->getCode()->shouldReturn('');
 
-        $code = 'UAH';
-
-        $this->setCode($code)
+        $this->setCode('uah')
             ->getCode()
-            ->shouldReturn($code);
+            ->shouldReturn('UAH');
 	}
 
-	function it_should_throw_exception_if_code_has_invalid_format()
+    function it_should_throw_exception_if_code_has_invalid_format()
     {
         $rightCode = 'UAH';
         $invalidCode = 'Dollars';
 
-//        $this->shouldNotThrow()
-//        $this->shouldThrow()
+        $this->shouldNotThrow(CatalogException::class)->during('setCode', [$rightCode]);
+        $this->shouldThrow(CatalogException::class)->during('setCode', [$invalidCode]);
     }
 }

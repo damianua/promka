@@ -1,0 +1,35 @@
+@startuml
+
+skinparam title {
+	fontSize 14
+	borderThickness 1
+}
+
+title
+Загрузка каталога из
+различных источников
+end title
+
+package App {
+	component CatalogLoader [
+
+		Catalog Loader
+
+	]
+}
+
+package Domain{
+	component Catalog
+}
+
+package Infrastructure{
+	component Eloquent
+}
+
+CatalogLoader -right-> () "Web Site"
+CatalogLoader -up-> () File
+CatalogLoader -up-> () Api
+CatalogLoader -down-> Eloquent
+Eloquent -> Catalog
+
+@enduml
