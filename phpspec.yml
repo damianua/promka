@@ -1,0 +1,11 @@
+suites:
+  app:
+    src_path: app
+    spec_path: tests
+  domain:
+    src_path: domain
+    spec_path: tests
+  infrastructure:
+    src_path: infrastructure
+    spec_path: tests
+formatter.name: pretty
