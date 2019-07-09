@@ -2,14 +2,14 @@
 
 namespace spec\Domain\Catalog\Categories;
 
-use Domain\Catalog\Categories\Category;
+use Domain\Catalog\Entities\Category;
 use Domain\Core\AbstractEntity;
 use PhpSpec\ObjectBehavior;
 
 /**
  * Class CategorySpec
  * @package spec\Domain\Catalog\Categories
- * @mixin Category
+ * @mixin \Domain\Catalog\Entities\Category
  */
 class CategorySpec extends ObjectBehavior
 {
@@ -34,7 +34,7 @@ class CategorySpec extends ObjectBehavior
             ->shouldReturn($name);
     }
 
-    function it_should_set_and_get_parent_category(Category $parentCategory)
+    function it_should_set_and_get_parent_category(\Domain\Catalog\Entities\Category $parentCategory)
     {
         $this->getParentCategory()->shouldReturn(null);
 

@@ -2,21 +2,21 @@
 
 namespace spec\Domain\Catalog\Prices;
 
-use Domain\Catalog\Prices\Currency;
-use Domain\Catalog\Prices\Price;
+use Domain\Catalog\Entities\Currency;
+use Domain\Catalog\Entities\Price;
 use Domain\Core\AbstractEntity;
 use PhpSpec\ObjectBehavior;
 
 /**
  * Class PriceSpec
  * @package spec\Domain\Catalog\Prices
- * @mixin Price
+ * @mixin \Domain\Catalog\Entities\Price
  */
 class PriceSpec extends ObjectBehavior
 {
 	function it_should_initializable()
 	{
-		$this->shouldBeAnInstanceOf(Price::class);
+		$this->shouldBeAnInstanceOf(\Domain\Catalog\Entities\Price::class);
 	}
 
 	function it_should_extends_abstract_entity()
