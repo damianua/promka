@@ -11,7 +11,7 @@ use Prophecy\Argument;
 /**
  * Class ProductSpec
  * @package spec\Domain\Products
- * @mixin \Domain\Catalog\Products\\Domain\Catalog\Entities\Product
+ * @mixin \Domain\Catalog\Entities\Product
  */
 class ProductSpec extends ObjectBehavior
 {
@@ -36,12 +36,18 @@ class ProductSpec extends ObjectBehavior
             ->shouldReturn($name);
     }
 
-    function it_should_set_and_get_category(Category $category)
+    function it_should_set_and_get_categories(
+        Category $category1,
+        Category $category2,
+        Category $category3
+    )
     {
-        $this->getCategory()->shouldReturn(null);
+        $categories = [$category1, $category2, $category3];
 
-        $this->setCategory($category)
-            ->getCategory()
-            ->shouldReturn($category);
+        $this->getCategories()->shouldReturn([]);
+
+        $this->setCategories($categories)
+            ->getCategories()
+            ->shouldReturn($categories);
     }
 }
