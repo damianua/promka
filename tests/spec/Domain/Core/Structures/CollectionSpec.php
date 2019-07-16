@@ -111,6 +111,30 @@ class CollectionSpec extends ObjectBehavior
         $this->count()->shouldReturn(1);
     }
 
+    function it_should_enumerate_items()
+    {
+        $collection = $this->each(function($item, $key){
+            return $item.'_'.$key;
+        });
+
+        $collection->shouldNotBe($this);
+        $collection->all()->shouldReturn([
+            'item1_0', 'item2_1', 'item3_2'
+        ]);
+    }
+
+    function it_should_walk_around_items()
+    {
+        $collection = $this->walk(function(&$item, $key){
+            $item = $item.'_'.$key;
+        });
+
+        $collection->shouldBe($this);
+        $collection->all()->shouldReturn([
+            'item1_0', 'item2_1', 'item3_2'
+        ]);
+    }
+
     private function createArrayableObject(array $attributes)
     {
         $obj = new class($attributes) implements Arrayable{

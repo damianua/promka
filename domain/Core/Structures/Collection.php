@@ -45,6 +45,22 @@ class Collection implements ArrayAccess, Iterator, Arrayable, Jsonable
         return count($this->items);
     }
 
+    public function each(callable $function): Collection
+    {
+        $items = [];
+        foreach($this->items as $key => $value){
+            $items[$key] = call_user_func($function, $value, $key);
+        }
+
+        return new static($items);
+    }
+
+    public function walk(callable $function): Collection
+    {
+        array_walk($this->items, $function);
+
+        return $this;
+    }
 
     public function toJson(int $options = 0): string
     {

@@ -25,18 +25,16 @@ class ProductCategories extends Collection
         $this->product = $product;
     }
 
-    public function setCanonical($categoryId)
+    public function setCanonical(Category $category)
     {
-        foreach($this->all() as $category){
-            if($categoryId !== $category->getId()){
-                continue;
+        foreach($this->all() as $c){
+            if($c === $category){
+                $this->canonicalCategory = $category;
+                return $this;
             }
-            $this->canonicalCategory = $category;
-
-            return $this;
         }
 
-        throw CatalogException::getCanonicalCategoryNotFound($categoryId);
+        throw CatalogException::getCanonicalCategoryNotFoundException($category);
     }
 
     public function getCanonical(): ?Category

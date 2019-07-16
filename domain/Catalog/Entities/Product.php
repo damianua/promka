@@ -4,16 +4,20 @@
 namespace Domain\Catalog\Entities;
 
 
-use Domain\Catalog\Entities\Category;
+use Domain\Catalog\Collections\ProductCategories;
 use Domain\Core\AbstractEntity;
 
 class Product extends AbstractEntity
 {
     protected $name = '';
     /**
-     * @var \Domain\Catalog\Entities\Category
+     * @var ProductCategories
      */
-    protected $category;
+    protected $categories;
+
+    public function __construct()
+    {
+    }
 
     public function setName(string $name = '')
     {
@@ -27,22 +31,17 @@ class Product extends AbstractEntity
         return $this->name;
     }
 
-    /**
-     * @return \Domain\Catalog\Entities\Category
-     */
-    public function getCategory(): ?Category
+    public function setCategories(ProductCategories $categories)
     {
-        return $this->category;
-    }
-
-    /**
-     * @param \Domain\Catalog\Entities\Category $category
-     * @return Product
-     */
-    public function setCategory(Category $category)
-    {
-        $this->category = $category;
+        $this->categories = $categories;
 
         return $this;
+    }
+
+    public function getCategories()
+    {
+        $this->categories = $this->categories ?? new ProductCategories($this);
+
+        return $this->categories;
     }
 }

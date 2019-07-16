@@ -2,6 +2,7 @@
 
 namespace spec\Domain\Catalog\Entities;
 
+use Domain\Catalog\Collections\ProductCategories;
 use Domain\Catalog\Entities\Category;
 use Domain\Core\AbstractEntity;
 use Domain\Catalog\Entities\Product;
@@ -36,15 +37,14 @@ class ProductSpec extends ObjectBehavior
             ->shouldReturn($name);
     }
 
-    function it_should_set_and_get_categories(
-        Category $category1,
-        Category $category2,
-        Category $category3
-    )
+    function it_should_set_and_get_categories()
     {
-        $categories = [$category1, $category2, $category3];
+        $this->getCategories()->shouldBeAnInstanceOf(ProductCategories::class);
+        $this->getCategories()->count()->shouldReturn(0);
 
-        $this->getCategories()->shouldReturn([]);
+        $categories = new ProductCategories($this->getWrappedObject(), [
+            new Category(), new Category()
+        ]);
 
         $this->setCategories($categories)
             ->getCategories()
