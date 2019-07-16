@@ -1,12 +1,48 @@
 @startuml
 
-skinparam title{
-	borderThickness 2
+set namespaceSeparator \\
+
+namespace Domain\\Core\\Interfaces{
+	abstract class ParseResult
+
+	interface ParserInterface{
+		+parse(): ParseResult
+	}
+
+	ParserInterface -> ParseResult: use
 }
 
-title CatalogLoader
+namespace Domain\\Catalog\\Interfaces{
+	interface ProductsRepositoryInterface{
+		+all(): Products
+	}
+}
 
-component "Web Site Loader"
-component "File Loader"
+namespace Domain\\CatalogLoader{
+	abstract class AbstractWebSiteParser {
+    	+parse()
+    }
+
+    AbstractWebSiteParser --|> Domain\\Core\\Interfaces\\ParserInterface
+}
+
+namespace Domain\\CatalogLoader\\Products{
+
+	abstract class AbstractWebSiteProductsRepository{
+		+__construct(AbstractWebSiteParser $parser)
+	}
+
+	AbstractWebSiteProductsRepository -up-|> Domain\\Catalog\\Interfaces\\ProductsRepositoryInterface
+	AbstractWebSiteProductsRepository -right-* AbstractWebSiteParser
+}
+
+namespace Infrastructure\\CatalogLoader\\WebSites\\ZenitProfi{
+	class ZenitProfiProduct
+	class ZenitProfiCategory
+	class ZenitProfiWebSiteParser{
+	}
+
+	ZenitProfiWebSiteParser --|> Domain\\CatalogLoader\\AbstractWebSiteParser
+}
 
 @enduml
